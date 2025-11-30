@@ -8,8 +8,8 @@ metadata:
     "helm.sh/hook": test
 spec:
   containers:
-    - name: test-connection
-      image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
-      command: ["/opt/kafka/bin/kafka-broker-api-versions.sh"]
-      args: ["--bootstrap-server", "{{ .Values.service.name }}:{{ .Values.service.port }}"]
+    - name: nc
+      image: busybox
+      command: ['nc']
+      args: ['-vz', '{{ .Values.service.name }}', '{{ .Values.service.port }}']
   restartPolicy: Never

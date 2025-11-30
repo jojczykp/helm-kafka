@@ -26,13 +26,13 @@ spec:
             - name: KAFKA_PROCESS_ROLES
               value: "broker,controller"
             - name: KAFKA_LISTENERS
-              value: "PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093"
+              value: "LOCALHOST://localhost:9094,PLAINTEXT://0.0.0.0:9092,CONTROLLER://0.0.0.0:9093"
             - name: KAFKA_ADVERTISED_LISTENERS
-              value: "PLAINTEXT://{{ .Values.service.name }}:{{ .Values.service.port }}"
+              value: "LOCALHOST://localhost:9094,PLAINTEXT://{{ .Values.service.name }}:{{ .Values.service.port }}"
             - name: KAFKA_CONTROLLER_LISTENER_NAMES
               value: "CONTROLLER"
             - name: KAFKA_LISTENER_SECURITY_PROTOCOL_MAP
-              value: "CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT"
+              value: "LOCALHOST:PLAINTEXT,CONTROLLER:PLAINTEXT,PLAINTEXT:PLAINTEXT"
             - name: KAFKA_CONTROLLER_QUORUM_VOTERS
               value: "1@localhost:9093"
             - name: KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR
@@ -47,3 +47,16 @@ spec:
               value: "1"
             - name: KAFKA_LOG4J_OPTS
               value: "-Dlog4j.logger.kafka.server.ReplicaManager=INFO,-Dlog4j.logger.kafka.coordinator.group.GroupCoordinator=INFO"
+          volumeMounts:
+            - name: init-scripts
+              mountPath: /init-scripts
+              readOnly: true
+          lifecycle:
+            postStart:
+              exec:
+                command: ["/bin/sh", "-c", "/init-scripts/init.sh > /proc/1/fd/1 2>&1"]
+      volumes:
+      - name: init-scripts
+        configMap:
+          name: {{ include "kafka.fullname" . }}-init-scripts
+          defaultMode: 0555
