@@ -100,3 +100,17 @@ helm uninstall kafka
 ```bash
 minikube stop
 ```
+
+## With `gradle`/`kotlin`/`JUnit`
+
+```shell
+./gradlew :helmInstallKafkaToDefault
+```
+
+```shell
+./gradlew test # TODO
+```
+
+```shell
+./gradlew :helmUninstallKafkaFromDefault
+```
