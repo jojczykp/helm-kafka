@@ -1,6 +1,7 @@
 # Helm-Kafka
 
-A single node KRaft Kafka helm chart based on apache/kafka.
+A single node KRaft Kafka helm chart based on
+[apache/kafka](https://hub.docker.com/r/apache/kafka/).
 
 Intended to be used for development and testing purposes only.
 
