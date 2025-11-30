@@ -45,8 +45,6 @@ spec:
               value: "0"
             - name: KAFKA_NUM_PARTITIONS
               value: "1"
-            - name: KAFKA_LOG4J_OPTS
-              value: "-Dlog4j.logger.kafka.server.ReplicaManager=INFO,-Dlog4j.logger.kafka.coordinator.group.GroupCoordinator=INFO"
           volumeMounts:
             - name: init-scripts
               mountPath: /init-scripts
