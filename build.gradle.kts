@@ -4,7 +4,7 @@ plugins {
 }
 
 
-group = "org.example"
+group = "org.alterbit"
 version = "1.0-SNAPSHOT"
 
 repositories {
