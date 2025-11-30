@@ -45,6 +45,8 @@ spec:
               value: "0"
             - name: KAFKA_NUM_PARTITIONS
               value: "1"
+            - name: KAFKA_TOPIC
+              value: "{{ .Values.topic.name }}"
           volumeMounts:
             - name: init-scripts
               mountPath: /init-scripts

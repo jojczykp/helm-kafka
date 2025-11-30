@@ -23,7 +23,7 @@ spec:
                               | paste -s -d ' ' \
                           )
 
-          EXPECTED_TOPICS="test-topic-1"
+          EXPECTED_TOPICS="{{ .Values.topic.name }}"
 
           echo "Actual topics:   '${ACTUAL_TOPICS}'"
           echo "Expected topics: '${EXPECTED_TOPICS}'"

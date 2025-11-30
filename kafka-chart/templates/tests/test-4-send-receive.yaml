@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: "{{ include "chart.fullname" . }}-test-accessibility"
+  name: "{{ include "chart.fullname" . }}-test-send-receive"
   labels:
     {{- include "kafka.labels" . | nindent 4 }}
   annotations:
@@ -15,8 +15,8 @@ spec:
         - |
           set -e
 
-          TOPIC="test-topic-1"
-          SENT="Smog Wawelski"
+          TOPIC="{{ .Values.topic.name }}"
+          SENT="Smog Wawelski ${RANDOM}"
 
           echo "${SENT}" | \
               /opt/kafka/bin/kafka-console-producer.sh \
@@ -29,6 +29,7 @@ spec:
                   --topic "${TOPIC}" \
                   --from-beginning \
                   --timeout-ms 1000 \
+                    | grep "${SENT}" \
               )
 
           echo "Sent:     '${SENT}'"

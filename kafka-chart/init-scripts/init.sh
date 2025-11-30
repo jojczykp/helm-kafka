@@ -13,8 +13,8 @@ done
 echo "Kafka is ready."
 
 echo
-echo "Creating topics..."
-/opt/kafka/bin/kafka-topics.sh --bootstrap-server localhost:9094 --create --topic test-topic-1 --partitions 1 --replication-factor 1
+echo "Creating ${KAFKA_TOPIC} topic..."
+/opt/kafka/bin/kafka-topics.sh --bootstrap-server localhost:9094 --create --topic "${KAFKA_TOPIC}" --partitions 1 --replication-factor 1
 
 echo
 echo "All topics:"
