@@ -5,7 +5,7 @@ set -e
 echo "----------------------------------------"
 echo
 echo "Waiting for Kafka to be ready..."
-until /opt/kafka/bin/kafka-broker-api-versions.sh --bootstrap-server localhost:9094; do
+until /opt/kafka/bin/kafka-broker-api-versions.sh --bootstrap-server localhost:9094 2>/dev/null; do
   echo "Kafka not yet listening. Sleeping 1 second..."
   sleep 1
 done
