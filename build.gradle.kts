@@ -13,15 +13,15 @@ repositories {
 
 helm {
     charts {
-        create("kafkachart") {
-            sourceDir = layout.projectDirectory.dir("kafkachart")
+        create("kafka") {
+            sourceDir = layout.projectDirectory.dir("kafka-chart")
             version = "0.0.1"
         }
     }
 
     releases {
         create("kafka") {
-            from(chart("kafkachart"))
+            from(chart("kafka"))
             version = "0.0.1"
             namespace = "default"
             kubeContext = "minikube"
