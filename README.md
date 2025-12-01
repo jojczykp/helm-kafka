@@ -13,7 +13,7 @@ minikube start
 ```
 
 ```bash
-helm install kafka ./kafka-chart
+helm install kafka ./chart
 ```
 
 

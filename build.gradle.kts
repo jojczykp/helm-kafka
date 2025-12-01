@@ -14,7 +14,7 @@ repositories {
 helm {
     charts {
         create("kafka") {
-            sourceDir = layout.projectDirectory.dir("kafka-chart")
+            sourceDir = layout.projectDirectory.dir("chart")
             version = "0.0.1"
         }
     }
