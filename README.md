@@ -59,7 +59,7 @@ echo 'A-ha!' | /opt/kafka/bin/kafka-console-producer.sh --bootstrap-server kafka
 
 ## Use from outside the cluster
 
-Note: port 9094
+Note: port 9095
 
 **Terminal 0:**
 
@@ -68,7 +68,7 @@ POD=$(kubectl get pod -l app.kubernetes.io/name=kafka -o jsonpath='{.items[0].me
 ```
 
 ```bash
-kubectl port-forward "${POD}" 9094:9094
+kubectl port-forward "${POD}" 9095:9095
 ```
 
 **Terminal 1:**
@@ -78,7 +78,7 @@ POD=$(kubectl get pod -l app.kubernetes.io/name=kafka -o jsonpath='{.items[0].me
 ```
 
 ```bash
-kcat -b localhost:9094 -t "test-topic-1" -C -o end
+kcat -b localhost:9095 -t "test-topic-1" -C -o end
 ```
 
 **Terminal 2:**
@@ -88,7 +88,7 @@ POD=$(kubectl get pod -l app.kubernetes.io/name=kafka -o jsonpath='{.items[0].me
 ```
 
 ```bash
-echo 'A-ha!' | kcat -b localhost:9094 -t "test-topic-1" -P
+echo 'A-ha!' | kcat -b localhost:9095 -t "test-topic-1" -P
 ```
 
 ## Stop
