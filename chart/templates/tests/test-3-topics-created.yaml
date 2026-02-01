@@ -23,7 +23,7 @@ spec:
                               | paste -s -d ' ' \
                           )
 
-          EXPECTED_TOPICS="{{ .Values.topic.name }}"
+          EXPECTED_TOPICS="{{ .Values.topics | sortAlpha | join " " }}"
 
           echo "Actual topics:   '${ACTUAL_TOPICS}'"
           echo "Expected topics: '${EXPECTED_TOPICS}'"
