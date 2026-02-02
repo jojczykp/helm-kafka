@@ -13,9 +13,20 @@ spec:
       labels:
         {{- include "kafka.selectorLabels" . | nindent 8 }}
     spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        runAsGroup: 1000
+        fsGroup: 1000
       containers:
         - name: kafka
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+                - ALL
+            readOnlyRootFilesystem: true
           ports:
             - name: kafka
               protocol: TCP
@@ -53,8 +64,14 @@ spec:
             - name: init-scripts
               mountPath: /init-scripts
               readOnly: true
-            - name: kafka-data
+            - name: data
               mountPath: /var/lib/kafka/data
+            - name: config
+              mountPath: /opt/kafka/config
+            - name: logs
+              mountPath: /opt/kafka/logs
+            - name: tmp
+              mountPath: /tmp
           lifecycle:
             postStart:
               exec:
@@ -64,5 +81,11 @@ spec:
         configMap:
           name: {{ include "chart.fullname" . }}-init-scripts
           defaultMode: 0555
-      - name: kafka-data
+      - name: data
+        emptyDir: {}
+      - name: config
+        emptyDir: {}
+      - name: logs
+        emptyDir: {}
+      - name: tmp
         emptyDir: {}
